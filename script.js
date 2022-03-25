@@ -25,10 +25,7 @@ function startGame(){
   // swap the Start and Stop buttons
 document.getElementById("startBtn").classList.add("hidden");
 document.getElementById("stopBtn").classList.remove("hidden");
-  for(let i = 0; i<10; i++) { // create an array with 10 different pattern
-  const rndInt = Math.floor(Math.random() * 5) + 1 //generate rand int from the range of 1 to 5
-  pattern.push(rndInt)} // push them in t
-console.log(pattern[0])
+ 
   playClueSequence()
 }
 function stopGame(){
