@@ -1,15 +1,12 @@
 // global constants
 const clueHoldTime = 120; //how long to hold each clue's light/sound
-const cluePauseTime = 100; //how long to pause in between clues
+const cluePauseTime = 200; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 //Global Variables
 var tonePlaying = false;
 
 const pattern = []//create an array for pattern
-for(let i = 0; i<10; i++) { // create an array with 10 different pattern
-  const rndInt = Math.floor(Math.random() * 5) + 1 //generate rand int from the range of 1 to 5
-  pattern.push(rndInt)} // push them in t
-console.log(pattern[0])
+
 //var pattern = [2, 2, 4, 3, 2, 1, 2, 4,5,2];
 var progress = 0; 
 var gamePlaying = false;
@@ -19,6 +16,10 @@ const ARRAY_LENGTH = 10
 
 
 function startGame(){
+  for(let i = 0; i<10; i++) { // create an array with 10 different pattern
+  const rndInt = Math.floor(Math.random() * 5) + 1 //generate rand int from the range of 1 to 5
+  pattern.push(rndInt)} // push them in t
+console.log(pattern[0])
     //initialize game variables
     progress = 0;
     gamePlaying = true;
@@ -32,9 +33,11 @@ function stopGame(){
     //initialize game variables
    
     gamePlaying = false;
+  
   // swap the Start and Stop buttons
 document.getElementById("startBtn").classList.remove("hidden");
 document.getElementById("stopBtn").classList.add("hidden");
+   pattern.splice(0,pattern.length);//clear the int in the array so the player will play with a new pattern
 }
 // Sound Synthesis Functions
 const freqMap = {
@@ -120,10 +123,12 @@ function guess(btn){
     if(guessCounter == progress){
       if(progress == pattern.length - 1){
         //GAME OVER: WIN!
+        pattern.splice(0,pattern.length);//clear the int in the array so the player will play with a new pattern
         winGame();
       }else{
         //Pattern correct. Add next segment
         progress++;
+       
         playClueSequence();
       }
     }else{
@@ -133,6 +138,7 @@ function guess(btn){
   }else{
     //Guess was incorrect
     //GAME OVER: LOSE!
+    pattern.splice(0,pattern.length);//clear the int in the array so the player will play with a new pattern
     loseGame();
   }
   // add game logic here
