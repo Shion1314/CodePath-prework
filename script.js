@@ -1,5 +1,5 @@
 // global constants
-const clueHoldTime = 120; //how long to hold each clue's light/sound
+var clueHoldTime = 250; //how long to hold each clue's light/sound
 const cluePauseTime = 200; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 //Global Variables
@@ -16,6 +16,7 @@ const ARRAY_LENGTH = 10
 
 
 function startGame(){
+ 
   for(let i = 0; i<10; i++) { // create an array with 10 different pattern
   const rndInt = Math.floor(Math.random() * 5) + 1 //generate rand int from the range of 1 to 5
   pattern.push(rndInt)} // push them in t
@@ -23,6 +24,7 @@ console.log(pattern[0])
     //initialize game variables
     progress = 0;
     gamePlaying = true;
+  clueHoldTime=250;
   // swap the Start and Stop buttons
 document.getElementById("startBtn").classList.add("hidden");
 document.getElementById("stopBtn").classList.remove("hidden");
@@ -33,7 +35,7 @@ function stopGame(){
     //initialize game variables
    
     gamePlaying = false;
-  
+  clueHoldTime=250;
   // swap the Start and Stop buttons
 document.getElementById("startBtn").classList.remove("hidden");
 document.getElementById("stopBtn").classList.add("hidden");
@@ -101,10 +103,13 @@ function playClueSequence(){
   guessCounter = 0;
   let delay = nextClueWaitTime; //set delay to initial wait time
   for(let i=0;i<=progress;i++){ // for each clue that is revealed so far
+    
     console.log("play single clue: " + pattern[i] + " in " + delay + "ms")
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
-    delay += clueHoldTime 
+    delay += clueHoldTime; 
+    console.log(clueHoldTime)
     delay += cluePauseTime;
+    
   }
 }
 function loseGame(){
@@ -127,10 +132,11 @@ function guess(btn){
         //GAME OVER: WIN!
         pattern.splice(0,pattern.length);//clear the int in the array so the player will play with a new pattern
         winGame();
+        clueHoldTime=250;
       }else{
         //Pattern correct. Add next segment
         progress++;
-       
+       clueHoldTime = clueHoldTime-20;
         playClueSequence();
       }
     }else{
@@ -142,6 +148,7 @@ function guess(btn){
     //GAME OVER: LOSE!
     pattern.splice(0,pattern.length);//clear the int in the array so the player will play with a new pattern
     loseGame();
+    clueHoldTime=250;
   }
   // add game logic here
 }
