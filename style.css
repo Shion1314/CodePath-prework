@@ -50,7 +50,7 @@ border-radius: 10px;
 
 
 #Button3 {
-    background: pink;
+    background: lightpink;
 }
 #Button3:active,#Button3.lit {
     background:red;
@@ -58,10 +58,10 @@ border-radius: 10px;
 
 
 #Button4 {
-    background: lightyellow;
+    background: Brown;
 }
 #Button4:active,#Button4.lit {
-    background:yellow;
+    background:rosybrown;
 }
 #Button5 {
     background: Black;
